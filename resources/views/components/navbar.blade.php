@@ -11,15 +11,17 @@
                             <a href="{{ route('about') }}" class="nav-item nav-link">Biz haqimizda</a>
                             <a href="{{ route('services') }}" class="nav-item nav-link">Xizmatlar</a>
                             <a href="{{ route('projects') }}" class="nav-item nav-link">Project</a>
+
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="blog.html" class="dropdown-item">Latest Blog</a>
-                                    <a href="single.html" class="dropdown-item">Blog Detail</a>
+                                    <a href="{{ route('blogs') }}" class="dropdown-item">Blog</a>
+                                    <a href="{{ route('single') }}" class="dropdown-item">Blog Detail</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+
+                            <a href="{{ route('contacts') }}" class="nav-item nav-link">Al'oqa</a>
                         </div>
-                        <a href="" class="btn btn-primary mr-3 d-none d-lg-block">Get A Quote</a>
+                        <a href="#" class="btn btn-primary mr-3 d-none d-lg-block">Get A Quote</a>
                     </div>
                 </nav>
