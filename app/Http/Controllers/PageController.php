@@ -26,11 +26,6 @@ class PageController extends Controller
         return view('projects');
     }
 
-    public function blogs()
-    {
-        return view('blogs');
-    }
-
     public function single()
     {
         return view('single');
