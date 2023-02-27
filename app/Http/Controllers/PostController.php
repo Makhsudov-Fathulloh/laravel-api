@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -64,11 +65,6 @@ class PostController extends Controller
             'recent_posts' => Post::latest()->whereNot('id', $post->id)->take(5)->get()
         ]); */
 
-        /* return view('posts.show')->with([
-                'post' => $post,
-                'recent_posts' => Post::latest()->where('id', '!=', $post->id)->take(4)->get()
-        ]); */
-
         return view('posts.show')->with([
             'post' => $post,
             'recent_posts' => Post::latest()->get()->except($post->id)->take(5) // obshiy ol keyin 5 tasini chiqar (xato)
@@ -76,20 +72,44 @@ class PostController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Post $post) // bo'glash
     {
-        //
+        return view('posts.edit')->with(['post' => $post]);
     }
 
 
-    public function update(Request $request, $id)
+    public function update(StorePostRequest $request, Post $post) // bo'glash
     {
-        //
+        if ($request->hasFile('photo')) {
+
+            if (isset($post->photo)) {
+                Storage::delete($post->photo);
+            }
+
+            $name = $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('post-photos', $name, 'public');
+        }
+
+        $post->update([
+            'title' => $request->title,
+            'short_content' => $request->short_content,
+            'content' => $request->content,
+            'photo' => $path ?? $post->photo,
+        ]);
+
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+
+        if (isset($post->photo)) {
+            Storage::delete('public/'.$post->photo);
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index');
     }
 }
