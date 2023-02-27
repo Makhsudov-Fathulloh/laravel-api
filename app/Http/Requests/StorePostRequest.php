@@ -12,6 +12,7 @@ class StorePostRequest extends FormRequest
             'title' => 'Sarlavha',
             'short_content' => 'Qisqacha mazmuni',
             'content' => 'Maqola',
+            'photo' => 'Photo'
         ];
     }
 
@@ -27,7 +28,8 @@ class StorePostRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'short_content' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'photo' => 'nullable|image|max:2*1024'
         ];
     }
 }

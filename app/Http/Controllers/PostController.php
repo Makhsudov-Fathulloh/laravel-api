@@ -19,7 +19,7 @@ class PostController extends Controller
 
     public function create()
     {
-         return view('posts.create');
+        return view('posts.create');
     }
 
 
@@ -30,11 +30,20 @@ class PostController extends Controller
         ]);
          */
 
+        /* photo kelib post-photos ga tushadi
+         $path = $request->file('photo')->store('post-photos', 'public');
+         $path = Storage::putFile('photo', $request->file('post-photo', 'public')); */
+
+        if ($request->hasFile('photo')) {
+            $name = $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('post-photos', $name, 'public');
+        }
+
         $post = Post::create([
             'title' => $request->title,
             'short_content' => $request->short_content,
             'content' => $request->content,
-            'photo' => $request->photo
+            'photo' => $path ?? null,
         ]);
 
         return redirect()->route('posts.index');

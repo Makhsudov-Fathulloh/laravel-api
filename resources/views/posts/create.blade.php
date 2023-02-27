@@ -14,40 +14,48 @@
             <div class="contact-form">
                 <div id="success"></div>
 
-                <form action="{{ route('posts.store') }}" method="post">
+                <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-row">
                         <div class="col-sm-6 control-group mb-4">
-                            <input type="text" class="form-control p-4" name="title" value="{{ old('title') }}" placeholder="Title"
-                                required="required" />
+                            <input type="text" class="form-control p-4" name="title" value="{{ old('title') }}"
+                                placeholder="Title" required="required" />
 
-                            @error('title')   {{-- validation --}}
+                            @error('title')
+                                {{-- validation --}}
                                 <p class="help-block text-danger">{{ $message }}</p>
                             @enderror
 
                         </div>
 
-                        {{-- <div class="col-sm-6 control-group mb-4">
-                                    <input type="file" class="form-control p-4" id="photo" placeholder="Photo" required="required"  />
-                                    <p class="help-block text-danger"></p>
-                                </div> --}}
+                        <div class="col-sm-6 control-group mb-4">
+                            <input type="file" class="form-control p-4" name="photo" placeholder="Photo"
+                                required="required" />
+
+                            @error('photo')
+                                {{-- validation --}}
+                                <p class="help-block text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="control-group mb-4">
-                        <input type="text" class="form-control p-4" name="short_content" value="{{ old('short_content') }}" placeholder="Short_content"
-                            required="required" />
+                        <input type="text" class="form-control p-4" name="short_content"
+                            value="{{ old('short_content') }}" placeholder="short_content" required="required" />
 
-                        @error('short_content')   {{-- validation --}}
-                                <p class="help-block text-danger">{{ $message }}</p>
-                            @enderror
+                        @error('short_content')
+                            {{-- validation --}}
+                            <p class="help-block text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="control-group mb-4">
-                        <textarea class="form-control p-4" rows="6" name="content" placeholder="Content" required="required">{{ old('content') }}</textarea>
+                        <textarea class="form-control p-4" rows="6" name="content" placeholder="content" required="required">{{ old('content') }}</textarea>
 
-                        @error('content')   {{-- validation --}}
-                                <p class="help-block text-danger">{{ $message }}</p>
-                            @enderror
+                        @error('content')
+                            {{-- validation --}}
+                            <p class="help-block text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <button class="btn btn-primary btn-block py-3 px-5" type="submit">Save</button>
