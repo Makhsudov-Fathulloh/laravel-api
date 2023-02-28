@@ -12,7 +12,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::all(); // MO dan barchasini olibkelish
+        $posts = Post::latest()->paginate(3); // MO dan oxirgi 3 tadan olibkelish
 
         return view('posts.index')->with('posts', $posts);
     }
