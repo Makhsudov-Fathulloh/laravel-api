@@ -13,6 +13,7 @@ class Post extends Model
     use HasFactory; // SoftDeletes;
 
     protected $fillable = [
+        'user_id', // User yoq ligi uchun
         'title',
         'short_content',
         'content',
