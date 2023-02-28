@@ -3,6 +3,8 @@
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [PageController::class, 'main']);
 Route::get('/about', [PageController::class, 'about'])->name('about');
@@ -11,7 +13,14 @@ Route::get('/projects', [PageController::class, 'projects'])->name('projects');
 Route::get('/single', [PageController::class, 'single'])->name('single');
 Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts');
 
-Route::resource('posts', PostController::class); // 6 qator sorovni ozi bajaradi
+
+
+
+Route::resources([
+  'posts' => PostController::class,
+  'comments' => CommentController::class,
+  'users' => UserController::class,
+]);                                        // 6 qator sorovni ozi bajaradi
 
 /* Route::get('posts', [PostController::class, 'index'])->name('posts.index');     // ruyxatni kurish
 Route::get('posts/{post}', [PageController::class, 'show'])->name('posts.show');     // 1 object get qilish
