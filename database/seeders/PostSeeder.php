@@ -11,7 +11,10 @@ class PostSeeder extends Seeder
 {
     public function run()
     {
-        Post::create([
+
+        Post::factory()->count(20)->create();
+
+        /* Post::create([ // Qolda yozilishi
             'user_id' => 1, // User yoq ligi uchun
             'title' => Str::random(10),
             'short_content' => Str::random(15),
@@ -25,8 +28,10 @@ class PostSeeder extends Seeder
             'short_content' => Str::random(15),
             'content' => Str::random(30),
             'photo' => null,
-        ]);
+        ]); */
 
-
+        // \App\Models\Post::factory(10)->create();
+        // \App\Models\Post::factory(10)->unverified()->create();
+        // \App\Models\Post::factory(10)->make(); // MO tushmaydi
     }
 }

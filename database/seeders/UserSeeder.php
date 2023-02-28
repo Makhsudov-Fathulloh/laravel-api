@@ -18,9 +18,19 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
+            'name' => 'John',
+            'email' => 'John@example.com',
+            'password' => Hash::make('secret'),
+        ]);
+
+        /* User::create([
             'name' => Str::random(10),
             'email' => Str::random(10) . '@gmail.com',
             'password' => Hash::make('secret'),
-        ]);
+        ]); */
+
+        // \App\Models\User::factory(10)->create();
+        // \App\Models\User::factory(10)->unverified()->create();
+        // \App\Models\User::factory(10)->make(); // MO tushmaydi
     }
 }
