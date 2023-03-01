@@ -12,7 +12,7 @@ class PostSeeder extends Seeder
     public function run()
     {
 
-        Post::factory()->count(20)->create();
+        Post::factory()->count(10)->create();
 
         /* Post::create([ // Qolda yozilishi
             'user_id' => 1, // User yoq ligi uchun

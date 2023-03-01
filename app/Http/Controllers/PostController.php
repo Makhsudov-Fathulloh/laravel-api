@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
 use App\Http\Requests\StorePostRequest;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -24,20 +25,14 @@ class PostController extends Controller
     {
         return view('posts.create')->with([
             'categories' => Category::all(),
+            'tags' => Tag::all(),
         ]);
     }
 
 
     public function store(StorePostRequest $request)
     {
-        /* $request->validate([
-            Bu yerda kodlar soni oshib ketmaskigi ushun validatsiyani request->... yozamiz
-        ]);
-         */
 
-        /* photo kelib post-photos ga tushadi
-         $path = $request->file('photo')->store('post-photos', 'public');
-         $path = Storage::putFile('photo', $request->file('post-photo', 'public')); */
 
         if ($request->hasFile('photo')) {
             $name = $request->file('photo')->getClientOriginalName();
@@ -52,6 +47,12 @@ class PostController extends Controller
             'content' => $request->content,
             'photo' => $path ?? null,
         ]);
+
+        if(isset($request->tags)){
+            foreach ($request->tags as $tag){
+                $post->tags()->attach($tag);
+            }
+        }
 
         return redirect()->route('posts.index');
     }
@@ -73,7 +74,9 @@ class PostController extends Controller
 
         return view('posts.show')->with([
             'post' => $post,
-            'recent_posts' => Post::latest()->get()->except($post->id)->take(5) // obshiy ol keyin 5 tasini chiqar (xato)
+            'recent_posts' => Post::latest()->get()->except($post->id)->take(5), // obshiy ol keyin 5 tasini chiqar (xato)
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
         ]);
     }
 

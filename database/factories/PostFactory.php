@@ -17,7 +17,6 @@ class PostFactory extends Factory
             'title' => fake()->sentence(),
             'short_content' => fake()->sentence(10),
             'content' => fake()->paragraph(20),
-
         ];
     }
 }
