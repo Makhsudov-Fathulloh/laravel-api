@@ -35,6 +35,11 @@
                             <a class="text-secondary text-uppercase font-weight-medium" href="">
                                 {{ $post->created_at }} </a>
                         </div>
+
+                        <div class="d-flex mb-2">
+                        <a class="bg-secondary font-weight-medium px-2 py-2 rounded text-white"> {{ $post->category->name }} </a>
+                    </div>
+
                         <h1 class="section-title mb-3"> {{ $post->title }} </h1>
                     </div>
 
@@ -66,25 +71,7 @@
                             magna, justo gubergren labore sit voluptua eos.</p>
 
                         <h3 class="mb-4">Est dolor lorem et ea</h3>
-                        <img class="img-fluid rounded w-50 float-right ml-4 mb-3" src="/img/blog-2.jpg" alt="Image">
 
-                        <p>Diam dolor est labore duo invidunt ipsum clita et, sed et lorem voluptua tempor invidunt at
-                            est
-                            sanctus sanctus. Clita dolores sit kasd diam takimata justo diam lorem sed. Magna amet sed
-                            rebum
-                            eos. Clita no magna no dolor erat diam tempor rebum consetetur, sanctus labore sed nonumy
-                            diam
-                            lorem amet eirmod. No at tempor sea diam kasd, takimata ea nonumy elitr sadipscing gubergren
-                            erat. Gubergren at lorem invidunt sadipscing rebum sit amet ut ut, voluptua diam dolores at
-                            sadipscing stet. Clita dolor amet dolor ipsum vero ea ea eos. Invidunt sed diam dolores
-                            takimata
-                            dolor dolore dolore sit. Sit ipsum erat amet lorem et, magna sea at sed et eos. Accusam
-                            eirmod
-                            kasd lorem clita sanctus ut consetetur et. Et duo tempor sea kasd clita ipsum et. Takimata
-                            kasd
-                            diam justo est eos erat aliquyam et ut. Ea sed sadipscing no justo et eos labore, gubergren
-                            ipsum magna dolor lorem dolore, elitr aliquyam takimata sea kasd dolores diam, amet et est
-                            accusam labore eirmod vero et voluptua. Amet labore clita duo et no.</p>
                     </div>
 
                     <div class="mb-5">

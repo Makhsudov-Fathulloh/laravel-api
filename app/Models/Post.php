@@ -14,19 +14,27 @@ class Post extends Model
 
     protected $fillable = [
         'user_id', // User yoq ligi uchun
+        'category_id',
         'title',
         'short_content',
         'content',
         'photo'
     ];
 
-    public function user()
+    public function user() // Post user ga tedishli
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category() // Post category ga tegishli
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function comments()  //: HasMany
     {
         return $this->hasMany(Comment::class);
     }
+
+
 }

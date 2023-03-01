@@ -17,6 +17,8 @@
                 <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-row">
+
+                        {{-- title --}}
                         <div class="col-sm-6 control-group mb-4">
                             <input type="text" class="form-control p-4" name="title" value="{{ old('title') }}"
                                 placeholder="Title" required="required" />
@@ -28,6 +30,7 @@
 
                         </div>
 
+                        {{-- photo --}}
                         <div class="col-sm-6 control-group mb-4">
                             <input type="file" class="form-control p-4" name="photo" placeholder="Photo"
                                 required="required" />
@@ -39,9 +42,29 @@
                         </div>
                     </div>
 
+                    {{-- category --}}
+                        <div class="control-group mb-4">
+                            <label type="text" class="form-control p-4" name="category" value="{{ old('title') }}"
+                                placeholder="Category" required="required">
+
+                            @error('title')
+                                {{-- validation --}}
+                                <p class="help-block text-danger">{{ $message }}</p>
+                            @enderror
+                                <select name="category_id">
+                                    <option>Category</option>
+                                @foreach ($categories as $category)
+                                   <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            </label>
+
+                        </div>
+
+                    {{-- short_content --}}
                     <div class="control-group mb-4">
                         <input type="text" class="form-control p-4" name="short_content"
-                            value="{{ old('short_content') }}" placeholder="short_content" required="required" />
+                            value="{{ old('short_content') }}" placeholder="Short_content" required="required" />
 
                         @error('short_content')
                             {{-- validation --}}
@@ -49,8 +72,9 @@
                         @enderror
                     </div>
 
+                    {{-- content --}}
                     <div class="control-group mb-4">
-                        <textarea class="form-control p-4" rows="6" name="content" placeholder="content" required="required">{{ old('content') }}</textarea>
+                        <textarea class="form-control p-4" rows="6" name="content" placeholder="Content" required="required">{{ old('content') }}</textarea>
 
                         @error('content')
                             {{-- validation --}}

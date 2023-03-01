@@ -9,15 +9,11 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PostFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition()
     {
         return [
             'user_id' => 1,
+            'category_id' => rand(1, 5),
             'title' => fake()->sentence(),
             'short_content' => fake()->sentence(10),
             'content' => fake()->paragraph(20),
