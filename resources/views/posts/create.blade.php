@@ -57,7 +57,7 @@
                         {{-- tags --}}
                         <div class="control-group mb-4">
                             <label type="text" class="form-control p-4" required="required">
-                                <select name="tags[]" multiple>
+                                <select name="tags[]">
                                     <option>Tags</option>
                                 @foreach ($tags as $tag)
                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
