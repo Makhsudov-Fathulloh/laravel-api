@@ -9,6 +9,8 @@
                     <div class="panel-body p-3">
                         <form action="{{ route('authenticate') }}" method="POST">
                             @csrf
+
+                            {{-- Email --}}
                             <div class="form-group py-2">
                                 <div class="input-field">
                                     <span class="far fa-user p-2"></span>
@@ -16,6 +18,7 @@
                                 </div>
                             </div>
 
+                            {{-- Password --}}
                             <div class="form-group py-1 pb-2">
                                 <div class="input-field">
                                     <span class="fas fa-lock px-2"></span>
@@ -33,7 +36,7 @@
 
                             <button type="submit" class="btn btn-success btn-block mt-3">Login</button>
 
-                            <div class="text-center pt-4 text-muted">Don't have an account? <a href="#">Sign up</a>
+                            <div class="text-center pt-4 text-muted">Don't have an account? <a href="{{ route('register') }}">Sign up</a>
                             </div>
                         </form>
 

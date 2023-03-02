@@ -23,8 +23,12 @@
             <a href="{{ route('contacts') }}" class="nav-item nav-link">Al'oqa</a>
         </div>
         @auth
-            <a href="{{ route('posts.create') }}" class="btn btn-primary mr-3 d-none d-lg-block">Add POST</a>
 
+             <div>
+                {{ auth()->user()->name }}
+             </div>
+
+            <a href="{{ route('posts.create') }}" class="btn btn-primary mr-3 d-none d-lg-block">Add POST</a>
 
             <form action="{{ route('logout') }}" method="POST">
                 @csrf

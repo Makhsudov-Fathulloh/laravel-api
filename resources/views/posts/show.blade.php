@@ -14,9 +14,10 @@
             <div class="row">
                 <div class="col-lg-8">
 
+                    @auth
                     <div class="d-flex justify-content-end">
                         <a class="btn btn-sm btn-outline-dark mr-2"
-                            href="{{ route('posts.edit', ['post' => $post->id]) }}">Edit</a>
+                        href="{{ route('posts.edit', ['post' => $post->id]) }}">Edit</a>
 
                         <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
                             onsubmit="return confirm('Do you really want to submit the form?');">
@@ -26,6 +27,7 @@
                         </form>
 
                     </div>
+                    @endauth
 
                     <div class="mb-5">
                         <div class="d-flex mb-2">
@@ -98,6 +100,7 @@
                     <div class="bg-light rounded p-5">
                         <h3 class="mb-4 section-title">Leave comment</h3>
 
+                        @auth
                         <form action="{{ route('comments.store') }}" method="POST">
                             @csrf
 
@@ -125,13 +128,21 @@
                                 <input type="submit" value="Add Comment" class="btn btn-primary">
                             </div>
                         </form>
+
+                        @else
+                        <div>Izoh qoldirish uchun
+                            <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                        </div>
+
+                        @endauth
                     </div>
                 </div>
 
                 <div class="col-lg-4 mt-5 mt-lg-0">
                     <div class="d-flex flex-column text-center bg-secondary rounded mb-5 py-5 px-4">
                         <img src="/img/user.jpg" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
-                        <h3 class="text-white mb-3">John Doe</h3>
+                        <h3 class="text-white mb-3"> {{ $post->user->name }} </h3>
+                        {{-- <h3 class="text-white mb-3"> {{ auth()->user()->name }} </h3> --}}
                         <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem ipsum,
                             ipsum
                             ipsum sit no ut est. Guber ea ipsum erat kasd amet est elitr ea sit.</p>
@@ -176,8 +187,10 @@
 
                         @foreach ($recent_posts as $post)
                             <div class="d-flex align-items-center border-bottom mb-3 pb-3">
+
                                 <img class="img-fluid rounded" src="/img/blog-1.jpg"
                                     style="width: 80px; height: 80px; object-fit: cover;" alt="">
+
                                 <div class="d-flex flex-column pl-3">
                                     <a class="text-dark mb-2" href="{{ $post->id }}">{{ $post->title }}</a>
                                     <div class="d-flex">
