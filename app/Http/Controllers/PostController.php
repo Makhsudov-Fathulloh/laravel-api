@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreated;
 use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
@@ -58,6 +59,8 @@ class PostController extends Controller
                 $post->tags()->attach($tag);
             }
         }
+
+        PostCreated::dispatch($post);
 
         return redirect()->route('posts.index');
     }
