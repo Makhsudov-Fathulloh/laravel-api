@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
-use App\Http\Requests\StorePostRequest;
-use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -15,6 +15,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+       /*  $this->authorizeResource(Post::class, "post"); // bu xolatda Gate lat kerakmas, Policy ra return true; bolsin */
     }
 
     public function index()
@@ -87,12 +88,28 @@ class PostController extends Controller
 
     public function edit(Post $post) // bo'glash
     {
+        /* if (!Gate::allows('update-post', $post)) {
+            abort(403);
+        } */
+        /* Gate::authorize('update-post', $post); */
+
+       /*  Gate::authorize('update', $post); */
+         $this->authorize('update', $post);
+
         return view('posts.edit')->with(['post' => $post]);
     }
 
 
     public function update(StorePostRequest $request, Post $post) // bo'glash
     {
+        /* if (!Gate::allows('update-post', $post)) {
+            abort(403);
+        } */
+       /*  Gate::authorize('update-post', $post); */
+
+        /* Gate::authorize('update', $post); */
+        $this->authorize('update', $post);
+
         if ($request->hasFile('photo')) {
 
             if (isset($post->photo)) {

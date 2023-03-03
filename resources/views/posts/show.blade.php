@@ -15,6 +15,9 @@
                 <div class="col-lg-8">
 
                     @auth
+                    {{-- @canany(['update-post', 'delete-post'], $post) --}}
+                    @canany(['update', 'delete'], $post)
+
                     <div class="d-flex justify-content-end">
                         <a class="btn btn-sm btn-outline-dark mr-2"
                         href="{{ route('posts.edit', ['post' => $post->id]) }}">Edit</a>
@@ -25,8 +28,9 @@
                             @method('DELETE')
                             <button class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
-
                     </div>
+                    {{-- @endcan --}}
+                    @endcanany
                     @endauth
 
                     <div class="mb-5">
