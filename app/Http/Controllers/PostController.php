@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\PostCreated;
 use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
+use App\Events\PostCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\PostCreated as MailPostCreated;
 
 class PostController extends Controller
 {
@@ -61,6 +63,8 @@ class PostController extends Controller
         }
 
         PostCreated::dispatch($post);
+
+        Mail::to($request->user())->send(new MailPostCreated($post));
 
         return redirect()->route('posts.index');
     }
