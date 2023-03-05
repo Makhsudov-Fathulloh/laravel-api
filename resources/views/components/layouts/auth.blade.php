@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/login.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
     <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/awesome-notifications/3.1.3/style.min.css' rel='stylesheet'>
+
 </head>
 
 <body class='snippet-body'>

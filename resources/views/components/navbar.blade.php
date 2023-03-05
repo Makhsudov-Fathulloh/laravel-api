@@ -24,9 +24,16 @@
         </div>
         @auth
 
-             <div>
+
+            <a href=" {{ route('notifications.index') }} " class="btn btn-primary mr-3">
+                <i class="fa fa-bell"></i>
+                <span class="badge badge-light"> {{ auth()->user()->unreadNotifications()->count() }} </span>
+                <span class="sr-only">unread messages</span>
+            </a>
+
+            <div>
                 {{ auth()->user()->name }}
-             </div>
+            </div>
 
             <a href="{{ route('posts.create') }}" class="btn btn-primary mr-3 d-none d-lg-block">Add POST</a>
 
@@ -34,7 +41,6 @@
                 @csrf
                 <button class="btn btn-danger mr-3 d-none d-lg-block">Logout</button>
             </form>
-
         @else
             <a href="{{ route('login') }}" class="btn btn-primary mr-3 d-none d-lg-block">KIrish</a>
         @endauth

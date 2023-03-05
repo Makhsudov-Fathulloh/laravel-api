@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\PostCreated as MailPostCreated;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PostCreated as NotificationsPostCreated;;
 
 class PostController extends Controller
 {
@@ -65,6 +67,9 @@ class PostController extends Controller
         PostCreated::dispatch($post);
 
         Mail::to($request->user())->send(new MailPostCreated($post));
+
+        // auth()->user()->notify(new NotificationsPostCreated($post));
+        Notification::send(auth()->user(), new NotificationsPostCreated($post));
 
         return redirect()->route('posts.index');
     }

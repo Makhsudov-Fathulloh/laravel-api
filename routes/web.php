@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', [PageController::class, 'main'])->name('main');
 Route::get('about', [PageController::class, 'about'])->name('about');
@@ -21,8 +22,13 @@ Route::get('register', [AuthController::class, 'register'])->name('register');
 
 Route::post('register', [AuthController::class, 'register_store'])->name('register.store');
 
+Route::middleware('auth')->group(function() {
+Route::get('notifications/{notification}/read', [NotificationController::class, 'read'])->name('notifications.read');
+});
+
 Route::resources([
   'posts' => PostController::class,
   'comments' => CommentController::class,
   'users' => UserController::class,
+  'notifications' => NotificationController::class,
 ]);                                        // 6 qator sorovni ozi bajaradi
