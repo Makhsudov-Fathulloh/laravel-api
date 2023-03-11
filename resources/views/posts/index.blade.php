@@ -51,7 +51,7 @@
                 </div>
                 @endforeach
 
-                {{ $posts->links() }}
+                {{-- {{ $posts->links() }} --}}
 
                 {{-- <div class="col-12">
                     <nav aria-label="Page navigation">

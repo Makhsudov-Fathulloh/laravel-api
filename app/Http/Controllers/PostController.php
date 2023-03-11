@@ -7,13 +7,15 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Events\PostCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\PostCreated as MailPostCreated;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\PostCreated as NotificationsPostCreated;;
+use App\Notifications\PostCreated as NotificationsPostCreated;
 
 class PostController extends Controller
 {
@@ -25,7 +27,10 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->paginate(9); // MO dan oxirgi 3 tadan olibkelish
+        // $posts = Post::latest()->paginate(9); // MO dan oxirgi 3 tadan olibkelish
+        $posts = Cache::remember('posts', now()->addSeconds(30), function () { // casheda bolsa opke
+            return Post::latest()->get(); // yoq bolsa orniga qoy
+        });
 
         return view('posts.index')->with('posts', $posts);
     }
