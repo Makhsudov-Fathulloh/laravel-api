@@ -27,10 +27,10 @@ class PostController extends Controller
 
     public function index()
     {
-        // $posts = Post::latest()->paginate(9); // MO dan oxirgi 3 tadan olibkelish
-        $posts = Cache::remember('posts', now()->addSeconds(30), function () { // casheda bolsa opke
+        $posts = Post::latest()->paginate(9); // MO dan oxirgi 3 tadan olibkelish
+        /* $posts = Cache::remember('posts', now()->addSeconds(30), function () { // casheda bolsa opke
             return Post::latest()->get(); // yoq bolsa orniga qoy
-        });
+        }); */
 
         return view('posts.index')->with('posts', $posts);
     }

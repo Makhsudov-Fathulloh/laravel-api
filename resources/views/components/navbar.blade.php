@@ -7,24 +7,49 @@
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div class="navbar-nav mr-auto py-0">
-            <a href="/" class="nav-item nav-link active">Bosh sahifa</a>
-            <a href="{{ route('about') }}" class="nav-item nav-link">Biz haqimizda</a>
-            <a href="{{ route('services') }}" class="nav-item nav-link">Xizmatlar</a>
-            <a href="{{ route('projects') }}" class="nav-item nav-link">Project</a>
+            <a href="/" class="nav-item nav-link active">{{ __('Bosh sahifa') }}</a>
+            <a href="{{ route('about') }}" class="nav-item nav-link">{{ __('Biz haqimizda') }}</a>
+            <a href="{{ route('services') }}" class="nav-item nav-link">{{ __('Xizmatlar') }}</a>
+            {{-- <a href="{{ route('projects') }}" class="nav-item nav-link">Proektlar</a> --}}
 
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ __('Mahsulotlar') }}</a>
                 <div class="dropdown-menu rounded-0 m-0">
-                    <a href="{{ route('posts.index') }}" class="dropdown-item">Latest Blog</a>
-                    <a href="{{ route('single') }}" class="dropdown-item">Blog Detail</a>
+                    <a href="{{ route('posts.index') }}" class="dropdown-item">{{ __('Mahsulotlar') }}</a>
+                    {{-- <a href="{{ route('single') }}" class="dropdown-item">Blog Detallaari</a> --}}
                 </div>
             </div>
 
-            <a href="{{ route('contacts') }}" class="nav-item nav-link">Al'oqa</a>
+            <a href="{{ route('contacts') }}" class="nav-item nav-link">{{ __('Al\'oqa') }}</a>
         </div>
+
+        {{-- Language --}}
+        <div class="nav-item dropdown">
+            <button href="#" class="btn btn-primary mr-3 d-none d-lg-block dropdown-toggle"
+                data-toggle="dropdown">{{ __('Tilni tanlang') }}</button>
+            <div class="dropdown-menu rounded-0 m-0">
+                @foreach ($all_locales as $locale)
+                    {{-- <a href="{{ route('locale.change', ['locale' => $locale]) }}" class="dropdown-item">{{ $locale }}</a> --}}
+                    @switch($locale)
+                        @case ('uz')
+                            <a href="{{ route('locale.change', ['locale' => $locale]) }}" class="dropdown-item">Uzbekcha</a>
+                        @break
+                            <br>
+                        @case ('ru')
+                            <a href="{{ route('locale.change', ['locale' => $locale]) }}" class="dropdown-item">Русский</a>
+                        @break
+                            <br>
+                        @case ('en')
+                            <a href="{{ route('locale.change', ['locale' => $locale]) }}" class="dropdown-item">English</a>
+                        @break
+
+                        @default
+                    @endswitch
+                @endforeach
+            </div>
+        </div>
+
         @auth
-
-
             <a href=" {{ route('notifications.index') }} " class="btn btn-primary mr-3">
                 <i class="fa fa-bell"></i>
                 <span class="badge badge-light"> {{ auth()->user()->unreadNotifications()->count() }} </span>
@@ -42,7 +67,7 @@
                 <button class="btn btn-danger mr-3 d-none d-lg-block">Logout</button>
             </form>
         @else
-            <a href="{{ route('login') }}" class="btn btn-primary mr-3 d-none d-lg-block">KIrish</a>
+            <a href="{{ route('login') }}" class="btn btn-primary mr-3 d-none d-lg-block">{{ __('Kirish') }}</a>
         @endauth
     </div>
 </nav>

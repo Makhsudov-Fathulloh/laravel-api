@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\NotificationController;
 
 Route::get('/', [PageController::class, 'main'])->name('main');
@@ -25,6 +26,8 @@ Route::post('register', [AuthController::class, 'register_store'])->name('regist
 Route::middleware('auth')->group(function() {
 Route::get('notifications/{notification}/read', [NotificationController::class, 'read'])->name('notifications.read');
 });
+
+Route::get('language/{locale}', [LanguageController::class, 'change_locale'])->name('locale.change');
 
 Route::resources([
   'posts' => PostController::class,
