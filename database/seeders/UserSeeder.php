@@ -17,11 +17,22 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $user = User::create([
             'name' => 'John',
-            'email' => 'John@example.com',
+            'email' => 'John@gmail.com',
+            'password' => Hash::make('secret1176'),
+        ]);
+
+        $user->roles()->attach([1,2,3]);
+
+
+        $user2 = User::create([
+            'name' => 'Maks',
+            'email' => 'mr.maks@gmail.com',
             'password' => Hash::make('secret123'),
         ]);
+
+        $user2->roles()->attach([1,2,3]);
 
         /* User::create([
             'name' => Str::random(10),
