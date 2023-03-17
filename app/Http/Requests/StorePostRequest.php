@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Role;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePostRequest extends FormRequest
@@ -19,6 +21,7 @@ class StorePostRequest extends FormRequest
 
     public function authorize() // dostup
     {
+        // Gate::authorize('create-post', Role::where('name', 'admin')->first()); // backend da gate bilan tekshirish
         return true;
     }
 

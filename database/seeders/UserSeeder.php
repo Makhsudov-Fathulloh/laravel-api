@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('secret1176'),
         ]);
 
-        $user->roles()->attach([1,2,3]);
+        $user->roles()->attach([1, 2]);
 
 
         $user2 = User::create([
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('secret123'),
         ]);
 
-        $user2->roles()->attach([1,2,3]);
+        $user2->roles()->attach([1, 2]);
 
         /* User::create([
             'name' => Str::random(10),

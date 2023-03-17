@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\PostCreated as MailPostCreated;
+use App\Models\Role;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PostCreated as NotificationsPostCreated;
 
@@ -38,6 +39,8 @@ class PostController extends Controller
 
     public function create()
     {
+        Gate::authorize('create-post', Role::where('name', 'admin')->first()); // backend da gate bilan tekshirish
+
         return view('posts.create')->with([
             'categories' => Category::all(),
             'tags' => Tag::all(),
@@ -50,8 +53,8 @@ class PostController extends Controller
 
 
         if ($request->hasFile('photo')) {
-            $name = $request->file('photo')->getClientOriginalName();
-            $path = $request->file('photo')->storeAs('post-photos', $name, 'public');
+
+            $path = $request->file('photo')->store('post-photos', 'public');
         }
 
         $post = Post::create([

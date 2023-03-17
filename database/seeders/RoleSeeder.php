@@ -24,10 +24,6 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::create([
-            'name' => 'blogger'
-        ]);
-
-        Role::create([
             'name' => 'user'
         ]);
     }
