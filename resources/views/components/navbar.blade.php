@@ -56,15 +56,17 @@
                 <span class="sr-only">unread messages</span>
             </a>
 
-            <div>
+            <div class="mr-2">
                 {{ auth()->user()->name }}
             </div>
 
-            <a href="{{ route('posts.create') }}" class="btn btn-primary mr-3 d-none d-lg-block">Add POST</a>
+            @if (auth()->user()->hasRole('admin'))
+            <a href="{{ route('posts.create') }}" class="btn btn-primary mr-3 d-none d-lg-block">{{ __('Post qo\'shish') }}</a>
+            @endif
 
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button class="btn btn-danger mr-3 d-none d-lg-block">Logout</button>
+                <button class="btn btn-danger mr-3 d-none d-lg-block">{{ __('Chiqish') }}</button>
             </form>
         @else
             <a href="{{ route('login') }}" class="btn btn-primary mr-3 d-none d-lg-block">{{ __('Kirish') }}</a>
